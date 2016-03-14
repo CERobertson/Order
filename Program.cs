@@ -65,7 +65,7 @@
             }
             else
             {
-                return Program.Depth(quotiant, next, base_number) + 1;
+                return Program.Depth(subject, next, base_number) + 1;
             }
         }
 
