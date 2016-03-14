@@ -14,11 +14,11 @@
                 if (i % 2 == 0)
                 {
                     try
-                    { 
+                    {
                         switch (args[i])
                         {
                             case "SEPARATOR":
-                                separator = args[i+1];
+                                separator = args[i + 1];
                                 break;
                             default:
                                 break;
@@ -39,12 +39,12 @@
             string line;
             while ((line = Console.In.ReadLine()) != null)
             {
-                var command = line.Split(new[] { separator}, StringSplitOptions.RemoveEmptyEntries);
+                var command = line.Split(new[] { separator }, StringSplitOptions.RemoveEmptyEntries);
                 int total = int.Parse(command[1]);
-                int depth = Program.Depth(total, 10);
+                int depth = Program.Depth(total-1, 1, 10);
                 for (int i = 0; i < total; i++)
                 {
-                    int leadingZeros = depth - Program.Depth(i, 10);
+                    int leadingZeros = depth - Program.Depth(i, 1, 10);
                     Console.Write(command[0]);
                     for (int j = 0; j < leadingZeros; j++)
                     {
@@ -55,16 +55,17 @@
             }
         }
 
-        private static int Depth(int subject, int divisor)
+        private static int Depth(int subject, int divisor, int base_number)
         {
             var quotiant = (subject / divisor);
-            if (quotiant < divisor)
+            var next = divisor * base_number;
+            if (quotiant < base_number)
             {
                 return 0;
             }
             else
             {
-                return Program.Depth(quotiant, (divisor * divisor)) + 1;
+                return Program.Depth(quotiant, next, base_number) + 1;
             }
         }
 
